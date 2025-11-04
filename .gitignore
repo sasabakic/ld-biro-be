@@ -7,4 +7,5 @@
 /public/bundles/
 /var/
 /vendor/
+/*.override.*
 ###< symfony/framework-bundle ###
