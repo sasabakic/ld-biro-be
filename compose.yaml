@@ -1,0 +1,58 @@
+services:
+  # PHP/Symfony Application
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - symfony
+
+  # MySQL Database
+  database:
+    image: mysql:8.0.32
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root}" ]
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - database_data:/var/lib/mysql
+    networks:
+      - symfony
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "8080:80"  # Access at http://localhost:8080
+    depends_on:
+      - database
+    networks:
+      - symfony
+
+  # Mailer (Mailpit)
+  mailer:
+    image: axllent/mailpit
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+      - symfony
+
+volumes:
+  database_data:
+
+networks:
+  symfony:
+    driver: bridge
