@@ -1,0 +1,20 @@
+Invoice:
+    type: object
+    config:
+        description: "An invoice created and sent to a client."
+        fields:
+            id:
+                type: "Int!"
+            amount:
+                type: "Int!"
+            paymentStatus:
+                type: "PaymentStatus!"
+            periodStart:
+                type: "String!"
+            periodEnd:
+                type: "String!"
+            issuer:
+                type: "User!"
+            client:
+                type: "Client!"
+

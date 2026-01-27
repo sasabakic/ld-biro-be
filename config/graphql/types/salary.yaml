@@ -1,0 +1,18 @@
+Salary:
+    type: object
+    config:
+        description: "Monthly salary record of an employee"
+        fields:
+            id:
+                type: "Int!"
+            paymentStatus:
+                type: "PaymentStatus"
+            paidDate:
+                type: "String"
+            periodMonth:
+                type: "String"
+            amount:
+                type: "Int!"
+            user:
+                type: "User!"
+

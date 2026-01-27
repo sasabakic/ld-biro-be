@@ -1,0 +1,14 @@
+Query:
+    type: object
+    config:
+        fields:
+            users:
+                type: "[User!]!"
+                resolve: '@=query("App\\GraphQL\\Resolver\\UserResolver::getAllUsers")'
+            user:
+                type: "User!"
+                args:
+                    id:
+                        type: "Int!"
+                resolve: '@=query("App\\GraphQL\\Resolver\\UserResolver::getSingleUser", args["id"])'
+

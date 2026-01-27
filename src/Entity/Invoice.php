@@ -13,34 +13,50 @@ class Invoice
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = null; // ID remains nullable because it is set by the database after flush
 
     #[ORM\Column]
-    private ?int $amount = null;
+    private int $amount;
 
     #[ORM\Column(enumType: PaymentStatus::class)]
-    private ?PaymentStatus $payment_status = null;
+    private PaymentStatus $payment_status;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $period_start = null;
+    private \DateTime $period_start;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $period_end = null;
+    private \DateTime $period_end;
 
     #[ORM\ManyToOne(inversedBy: 'issued_invoices')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $issuer = null;
+    private User $issuer;
 
     #[ORM\ManyToOne(inversedBy: 'invoices')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Client $client_id = null;
+    private Client $client;
+
+    public function __construct(
+        int $amount,
+        PaymentStatus $payment_status,
+        \DateTime $period_start,
+        \DateTime $period_end,
+        User $issuer,
+        Client $client
+    ) {
+        $this->amount = $amount;
+        $this->payment_status = $payment_status;
+        $this->period_start = $period_start;
+        $this->period_end = $period_end;
+        $this->issuer = $issuer;
+        $this->client = $client;
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAmount(): ?int
+    public function getAmount(): int
     {
         return $this->amount;
     }
@@ -52,7 +68,7 @@ class Invoice
         return $this;
     }
 
-    public function getPaymentStatus(): ?PaymentStatus
+    public function getPaymentStatus(): PaymentStatus
     {
         return $this->payment_status;
     }
@@ -64,7 +80,7 @@ class Invoice
         return $this;
     }
 
-    public function getPeriodStart(): ?\DateTime
+    public function getPeriodStart(): \DateTime
     {
         return $this->period_start;
     }
@@ -76,7 +92,7 @@ class Invoice
         return $this;
     }
 
-    public function getPeriodEnd(): ?\DateTime
+    public function getPeriodEnd(): \DateTime
     {
         return $this->period_end;
     }
@@ -88,26 +104,26 @@ class Invoice
         return $this;
     }
 
-    public function getIssuer(): ?User
+    public function getIssuer(): User
     {
         return $this->issuer;
     }
 
-    public function setIssuer(?User $issuer): static
+    public function setIssuer(User $issuer): static
     {
         $this->issuer = $issuer;
 
         return $this;
     }
 
-    public function getClientId(): ?Client
+    public function getClient(): Client
     {
-        return $this->client_id;
+        return $this->client;
     }
 
-    public function setClientId(?Client $client_id): static
+    public function setClient(Client $client): static
     {
-        $this->client_id = $client_id;
+        $this->client = $client;
 
         return $this;
     }

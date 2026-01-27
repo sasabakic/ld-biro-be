@@ -1,0 +1,5 @@
+PaymentStatus:
+    type: enum
+    config:
+        description: "Status of a payment"
+        enumClass: "App\\Enum\\PaymentStatus"

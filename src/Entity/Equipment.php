@@ -17,7 +17,7 @@ class Equipment
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $entry_date = null;
@@ -32,17 +32,23 @@ class Equipment
     private ?\DateTime $returned_date = null;
 
     #[ORM\Column(enumType: EquipmentCategory::class)]
-    private ?EquipmentCategory $entity_category = null;
+    private EquipmentCategory $entity_category;
 
     #[ORM\ManyToOne(inversedBy: 'equipment')]
     private ?User $employee = null;
+
+    public function __construct(string $name, EquipmentCategory $entity_category)
+    {
+        $this->name = $name;
+        $this->entity_category = $entity_category;
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -102,7 +108,7 @@ class Equipment
         return $this;
     }
 
-    public function getEntityCategory(): ?EquipmentCategory
+    public function getEntityCategory(): EquipmentCategory
     {
         return $this->entity_category;
     }

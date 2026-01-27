@@ -1,0 +1,28 @@
+Client:
+    type: object
+    config:
+        description: "A client of the company."
+        fields:
+            id:
+                type: "Int!"
+            name:
+                type: "String!"
+            pib:
+                type: "Int!"
+            mbr:
+                type: "Int!"
+            servicesPrice:
+                type: "String"
+            status:
+                type: "ClientStatus!"
+            dedicatedEmployee:
+                type: "User"
+            invoices:
+                type: "[Invoice!]!"
+
+
+ClientStatus:
+    type: enum
+    config:
+        description: "Status of the companies client."
+        enumClass: "App\\Enum\\ClientStatus"

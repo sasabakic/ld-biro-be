@@ -1,0 +1,21 @@
+User:
+    type: object
+    config:
+        description: "Employee in LD Biro doo"
+        fields:
+            id:
+                type: "Int!"
+            email:
+                type: "String!"
+            name:
+                type: "String"
+            salary:
+                type: "Int"
+            salaries:
+                type: "[Salary!]!"
+            equipment:
+                type: "[Equipment!]!"
+            issuedInvoices:
+                type: "[Invoice!]!"
+            clients:
+                type: "[Client!]!"

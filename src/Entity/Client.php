@@ -18,19 +18,19 @@ class Client
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column]
-    private ?int $pib = null;
+    private int $pib;
 
     #[ORM\Column]
-    private ?int $mbr = null;
+    private int $mbr;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $services_price = null;
 
     #[ORM\Column(enumType: ClientStatus::class)]
-    private ?ClientStatus $status = null;
+    private ClientStatus $status;
 
     #[ORM\ManyToOne(inversedBy: 'clients')]
     private ?User $dedicated_employee = null;
@@ -38,21 +38,24 @@ class Client
     /**
      * @var Collection<int, Invoice>
      */
-    #[ORM\OneToMany(targetEntity: Invoice::class, mappedBy: 'client_id')]
+    #[ORM\OneToMany(targetEntity: Invoice::class, mappedBy: 'client')]
     private Collection $invoices;
 
-    public function __construct()
+    public function __construct(string $name, int $pib, int $mbr, ClientStatus $status)
     {
         $this->invoices = new ArrayCollection();
+        $this->name = $name;
+        $this->pib = $pib;
+        $this->mbr = $mbr;
+        $this->status = $status;
     }
-
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -64,7 +67,7 @@ class Client
         return $this;
     }
 
-    public function getPib(): ?int
+    public function getPib(): int
     {
         return $this->pib;
     }
@@ -76,7 +79,7 @@ class Client
         return $this;
     }
 
-    public function getMbr(): ?int
+    public function getMbr(): int
     {
         return $this->mbr;
     }
@@ -100,7 +103,7 @@ class Client
         return $this;
     }
 
-    public function getStatus(): ?ClientStatus
+    public function getStatus(): ClientStatus
     {
         return $this->status;
     }
@@ -136,22 +139,13 @@ class Client
     {
         if (!$this->invoices->contains($invoice)) {
             $this->invoices->add($invoice);
-            $invoice->setClientId($this);
+            $invoice->setClient($this);
         }
 
         return $this;
     }
 
-    public function removeInvoice(Invoice $invoice): static
-    {
-        if ($this->invoices->removeElement($invoice)) {
-            // set the owning side to null (unless already changed)
-            if ($invoice->getClientId() === $this) {
-                $invoice->setClientId(null);
-            }
-        }
-
-        return $this;
-    }
-
+    // removeInvoice is intentionally removed.
+    // To remove an invoice, you should delete the Invoice entity
+    // or reassign it via $invoice->setClient($newClient).
 }

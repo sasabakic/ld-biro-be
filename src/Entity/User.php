@@ -19,7 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    private ?string $email = null;
+    private string $email;
 
     /**
      * @var list<string> The user roles
@@ -34,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column]
     private ?int $salary = null;
@@ -42,7 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Salary>
      */
-    #[ORM\OneToMany(targetEntity: Salary::class, mappedBy: 'user_id')]
+    #[ORM\OneToMany(targetEntity: Salary::class, mappedBy: 'user')]
     private Collection $salaries;
 
     /**
@@ -63,12 +63,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Client::class, mappedBy: 'dedicated_employee')]
     private Collection $clients;
 
-    public function __construct()
+    public function __construct(string $email, string $name)
     {
         $this->salaries = new ArrayCollection();
         $this->equipment = new ArrayCollection();
         $this->issued_invoices = new ArrayCollection();
         $this->clients = new ArrayCollection();
+        $this->email = $email;
+        $this->name = $name;
     }
 
     public function getId(): ?int
@@ -76,7 +78,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -152,7 +154,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // @deprecated, to be removed when upgrading to Symfony 8
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -188,7 +190,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->salaries->contains($salary)) {
             $this->salaries->add($salary);
-            $salary->setUserId($this);
+            $salary->setUser($this);
         }
 
         return $this;
@@ -198,8 +200,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->salaries->removeElement($salary)) {
             // set the owning side to null (unless already changed)
-            if ($salary->getUserId() === $this) {
-                $salary->setUserId(null);
+            if ($salary->getUser() === $this) {
+                $salary->setUser(null);
             }
         }
 

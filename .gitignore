@@ -9,3 +9,7 @@
 /vendor/
 *.override.*
 ###< symfony/framework-bundle ###
+
+.idea/
+*.iml
+.php-cs-fixer.cache

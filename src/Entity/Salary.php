@@ -25,11 +25,18 @@ class Salary
     private ?string $period_month = null;
 
     #[ORM\Column]
-    private ?int $amount = null;
+    private int $amount;
 
     #[ORM\ManyToOne(inversedBy: 'salaries')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_id = null;
+    private ?User $user = null;
+
+    public function __construct(int $amount, User $user)
+    {
+        $this->amount = $amount;
+        $this->user = $user;
+        $this->payment_status = PaymentStatus::PENDING;
+    }
 
     public function getId(): ?int
     {
@@ -72,7 +79,7 @@ class Salary
         return $this;
     }
 
-    public function getAmount(): ?int
+    public function getAmount(): int
     {
         return $this->amount;
     }
@@ -84,14 +91,14 @@ class Salary
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): static
+    public function setUser(?User $user): static
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }

@@ -1,0 +1,36 @@
+Equipment:
+    type: object
+    config:
+        description: "A piece of equipment employee has assigned."
+        fields:
+            id:
+                type: "Int!"
+            name:
+                type: "String!"
+            entryDate:
+                type: "String!"
+            status:
+                type: "EquipmentStatus"
+            assignedDate:
+                type: "String"
+            returnedDate:
+                type: "String"
+            entityCategory:
+                type: "EquipmentCategory!"
+            user:
+                type: "User"
+
+EquipmentStatus:
+    type: enum
+    config:
+        description: "Status of equipment"
+        enumClass: "App\\Enum\\EquipmentStatus"
+
+EquipmentCategory:
+    type: enum
+    config:
+        description: "Type of equipment"
+        enumClass: "App\\Enum\\EquipmentCategory"
+
+
+
