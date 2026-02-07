@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c87807e2d9b222b71cf39226fb081cce",
+    "content-hash": "1f7e7ede97d48750fdfc49a69fad9673",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -2743,6 +2743,124 @@
                 "source": "https://github.com/nelmio/NelmioCorsBundle/tree/2.5.0"
             },
             "time": "2024-06-24T21:25:28+00:00"
+        },
+        {
+            "name": "overblog/dataloader-bundle",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overblog/dataloader-bundle.git",
+                "reference": "6ac3ab346fc8ae88cd964d462defc451d335a4de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overblog/dataloader-bundle/zipball/6ac3ab346fc8ae88cd964d462defc451d335a4de",
+                "reference": "6ac3ab346fc8ae88cd964d462defc451d335a4de",
+                "shasum": ""
+            },
+            "require": {
+                "overblog/dataloader-php": "^1",
+                "php": "^8.1",
+                "symfony/dependency-injection": "^5.4 || ^6.3 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.3",
+                "react/promise": "^2.8.0",
+                "symfony/framework-bundle": "^5.4||^6.3 || ^7.0",
+                "symfony/phpunit-bridge": "^6.3 || ^7.0",
+                "symfony/yaml": "^5.4 || ^6.3 || ^7.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overblog\\DataLoaderBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Overblog",
+                    "homepage": "http://www.over-blog.com"
+                }
+            ],
+            "description": "DataLoader Symfony bundle implementation.",
+            "keywords": [
+                "Batching",
+                "caching",
+                "dataLoader"
+            ],
+            "support": {
+                "issues": "https://github.com/overblog/dataloader-bundle/issues",
+                "source": "https://github.com/overblog/dataloader-bundle/tree/v1.1.0"
+            },
+            "time": "2024-07-01T12:24:16+00:00"
+        },
+        {
+            "name": "overblog/dataloader-php",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overblog/dataloader-php.git",
+                "reference": "b5016b85163101ef804a1c7729574aa984d5c190"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overblog/dataloader-php/zipball/b5016b85163101ef804a1c7729574aa984d5c190",
+                "reference": "b5016b85163101ef804a1c7729574aa984d5c190",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "replace": {
+                "overblog/promise-adapter": "self.version"
+            },
+            "require-dev": {
+                "guzzlehttp/promises": "^1.5.0 || ^2.0.0",
+                "phpunit/phpunit": "^10.3",
+                "react/promise": "^2.8.0",
+                "webonyx/graphql-php": "^15.0"
+            },
+            "suggest": {
+                "guzzlehttp/promises": "To use with Guzzle promise",
+                "react/promise": "To use with ReactPhp promise",
+                "webonyx/graphql-php": "To use with Webonyx GraphQL native promise"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overblog\\DataLoader\\": "src/",
+                    "Overblog\\PromiseAdapter\\": "lib/promise-adapter/src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "DataLoaderPhp is a generic utility to be used as part of your application's data fetching layer to provide a simplified and consistent API over various remote data sources such as databases or web services via batching and caching.",
+            "keywords": [
+                "Batching",
+                "caching",
+                "dataLoader"
+            ],
+            "support": {
+                "issues": "https://github.com/overblog/dataloader-php/issues",
+                "source": "https://github.com/overblog/dataloader-php/tree/v1.1.0"
+            },
+            "time": "2024-12-03T14:44:03+00:00"
         },
         {
             "name": "overblog/graphql-bundle",
@@ -8722,11 +8840,100 @@
                 }
             ],
             "time": "2025-09-11T10:12:26+00:00"
+        },
+        {
+            "name": "symfony/web-profiler-bundle",
+            "version": "v7.3.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/web-profiler-bundle.git",
+                "reference": "3f288c176f4b70d083c1b37a0b9aa0c4745b2ef3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/3f288c176f4b70d083c1b37a0b9aa0c4745b2ef3",
+                "reference": "3f288c176f4b70d083c1b37a0b9aa0c4745b2ef3",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": ">=2.1",
+                "php": ">=8.2",
+                "symfony/config": "^7.3",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/framework-bundle": "^6.4|^7.0",
+                "symfony/http-kernel": "^6.4|^7.0",
+                "symfony/routing": "^6.4|^7.0",
+                "symfony/twig-bundle": "^6.4|^7.0",
+                "twig/twig": "^3.12"
+            },
+            "conflict": {
+                "symfony/form": "<6.4",
+                "symfony/mailer": "<6.4",
+                "symfony/messenger": "<6.4",
+                "symfony/serializer": "<7.2",
+                "symfony/workflow": "<7.3"
+            },
+            "require-dev": {
+                "symfony/browser-kit": "^6.4|^7.0",
+                "symfony/console": "^6.4|^7.0",
+                "symfony/css-selector": "^6.4|^7.0",
+                "symfony/stopwatch": "^6.4|^7.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bundle\\WebProfilerBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides a development tool that gives detailed information about the execution of any request",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "dev"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/web-profiler-bundle/tree/v7.3.10"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-01-07T10:03:30+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -8734,6 +8941,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }

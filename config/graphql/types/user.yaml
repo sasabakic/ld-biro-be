@@ -13,9 +13,14 @@ User:
                 type: "Int"
             salaries:
                 type: "[Salary!]!"
+                resolve: "@=service('salaries_loader').load(value.getId())"
             equipment:
                 type: "[Equipment!]!"
+                resolve: "@=service('equipment_loader').load(value.getId())"
             issuedInvoices:
                 type: "[Invoice!]!"
+                resolve: "@=service('user_invoices_loader').load(value.getId())"
             clients:
                 type: "[Client!]!"
+                resolve: "@=service('clients_loader').load(value.getId())"
+

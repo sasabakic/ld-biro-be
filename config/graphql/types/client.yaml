@@ -19,6 +19,7 @@ Client:
                 type: "User"
             invoices:
                 type: "[Invoice!]!"
+                resolve: "@=service('client_invoices_loader').load(value.getId())"
 
 
 ClientStatus:
