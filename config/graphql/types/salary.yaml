@@ -15,4 +15,5 @@ Salary:
                 type: "Int!"
             user:
                 type: "User!"
+                resolve: "@=service('user_loader').load(value.getUser().getId())"
 

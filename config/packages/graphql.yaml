@@ -8,3 +8,33 @@ overblog_graphql:
                 -   type: yaml
                     dir: "%kernel.project_dir%/config/graphql/types"
                     suffix: null
+    services:
+        promise_adapter: "webonyx_graphql.sync_promise_adapter"
+
+overblog_dataloader:
+    defaults:
+        promise_adapter: "overblog_dataloader.webonyx_graphql_sync_promise_adapter"
+    loaders:
+        salaries:
+            alias: "user_salaries_loader"
+            batch_load_fn: "@app.graphql.loader.salaries:resolveByUser"
+        equipment:
+            alias: "user_equipment_loader"
+            batch_load_fn: "@app.graphql.loader.equipment:resolveByUser"
+        user_invoices:
+            alias: "user_invoices_loader"
+            batch_load_fn: "@app.graphql.loader.invoices:resolveByUser"
+        client_invoices:
+            alias: "client_invoices_loader"
+            batch_load_fn: "@app.graphql.loader.invoices:resolveByClient"
+        clients:
+            alias: "user_clients_loader"
+            batch_load_fn: "@app.graphql.loader.clients:resolveByUser"
+        client:
+            alias: "client_loader"
+            batch_load_fn: "@app.graphql.loader.clients:resolveById"
+        user:
+            alias: "user_loader"
+            batch_load_fn: "@app.graphql.loader.users:resolveById"
+
+

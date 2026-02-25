@@ -16,6 +16,7 @@
         "doctrine/orm": "^3.5",
         "mark-gerarts/automapper-plus-bundle": "^1.5",
         "nelmio/cors-bundle": "^2.5",
+        "overblog/dataloader-bundle": "*",
         "overblog/graphql-bundle": "^1.7",
         "phpdocumentor/reflection-docblock": "^5.6",
         "phpstan/phpdoc-parser": "^2.3",
@@ -89,6 +90,8 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.64"
+        "symfony/maker-bundle": "^1.64",
+        "symfony/stopwatch": "7.3.*",
+        "symfony/web-profiler-bundle": "7.3.*"
     }
 }
