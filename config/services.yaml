@@ -21,3 +21,23 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    app.graphql.loader.salaries:
+        alias: App\GraphQL\Loader\SalariesLoader
+        public: true
+
+    app.graphql.loader.equipment:
+        alias: App\GraphQL\Loader\EquipmentLoader
+        public: true
+
+    app.graphql.loader.invoices:
+        alias: App\GraphQL\Loader\InvoicesLoader
+        public: true
+
+    app.graphql.loader.clients:
+        alias: App\GraphQL\Loader\ClientsLoader
+        public: true
+
+    app.graphql.loader.users:
+        alias: App\GraphQL\Loader\UsersLoader
+        public: true

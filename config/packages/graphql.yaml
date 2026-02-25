@@ -17,24 +17,24 @@ overblog_dataloader:
     loaders:
         salaries:
             alias: "user_salaries_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\SalariesLoader:resolveByUser"
+            batch_load_fn: "@app.graphql.loader.salaries:resolveByUser"
         equipment:
             alias: "user_equipment_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\EquipmentLoader:resolveByUser"
+            batch_load_fn: "@app.graphql.loader.equipment:resolveByUser"
         user_invoices:
             alias: "user_invoices_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\InvoicesLoader:resolveByUser"
+            batch_load_fn: "@app.graphql.loader.invoices:resolveByUser"
         client_invoices:
             alias: "client_invoices_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\InvoicesLoader:resolveByClient"
+            batch_load_fn: "@app.graphql.loader.invoices:resolveByClient"
         clients:
             alias: "user_clients_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\ClientsLoader:resolveByUser"
+            batch_load_fn: "@app.graphql.loader.clients:resolveByUser"
         client:
-            alias: 'client_loader'
-            batch_load_fn: '@App\\GraphQL\\Loader\\ClientsLoader:resolveById'
+            alias: "client_loader"
+            batch_load_fn: "@app.graphql.loader.clients:resolveById"
         user:
             alias: "user_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\UsersLoader:resolveById"
+            batch_load_fn: "@app.graphql.loader.users:resolveById"
 
 
