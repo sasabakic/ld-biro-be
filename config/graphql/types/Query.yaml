@@ -11,4 +11,7 @@ Query:
                     id:
                         type: "Int!"
                 resolve: '@=query("App\\GraphQL\\Resolver\\UserResolver::getSingleUser", args["id"])'
+            clients:
+                type: "[Client!]!"
+                resolve: '@=query("App\\GraphQL\\Resolver\\ClientsResolver::getAllClients")'
 

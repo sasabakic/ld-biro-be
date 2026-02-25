@@ -26,7 +26,7 @@ class UserResolver implements QueryInterface
         $user = $this->userRepository->find($id);
 
         if (!$user) {
-            throw  new UserError('User with id: '.$id.' not found.');
+            throw  new UserError("User with id: {$id} not found.");
         }
         return $user;
     }
