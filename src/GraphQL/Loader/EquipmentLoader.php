@@ -3,6 +3,7 @@
 namespace App\GraphQL\Loader;
 
 use App\Repository\EquipmentRepository;
+use GraphQL\Executor\Promise\Promise;
 use GraphQL\Executor\Promise\PromiseAdapter;
 
 class EquipmentLoader
@@ -16,23 +17,17 @@ class EquipmentLoader
         $this->equipmentRepository = $equipmentRepository;
     }
 
-    public function all(array $userIDs)
+    public function resolveByUser(array $userIDs): Promise
     {
-        //        $qb = $this->equipmentRepository->createQueryBuilder('e');
-        //        $qb->add('where', $qb->expr()->in('e.id', ':ids'));
-        //        $qb->setParameter('ids', $userIDs);
-        //        $equipment = $qb->getQuery()->getResult();
-        //
-        //        return $this->promiseAdapter->all($equipment);
         $equipment = $this->equipmentRepository->findBy(['employee' => $userIDs]);
 
-        $userMap = array_fill_keys($userIDs, []);
+        $map = array_fill_keys($userIDs, []);
 
         foreach ($equipment as $item) {
-            $userMap[$item->getEmployee()->getId()][] = $item;
+            $map[$item->getEmployee()->getId()][] = $item;
         }
 
-        return $this->promiseAdapter->createFulfilled(array_values($userMap));
+        return $this->promiseAdapter->createFulfilled(array_values($map));
 
     }
 }

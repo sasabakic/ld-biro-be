@@ -17,6 +17,7 @@ Client:
                 type: "ClientStatus!"
             dedicatedEmployee:
                 type: "User"
+                resolve: "@=service('user_loader').load(value.getDedicatedEmployee().getId())"
             invoices:
                 type: "[Invoice!]!"
                 resolve: "@=service('client_invoices_loader').load(value.getId())"

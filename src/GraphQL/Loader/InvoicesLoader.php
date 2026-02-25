@@ -4,6 +4,7 @@ namespace App\GraphQL\Loader;
 
 use App\Entity\Invoice;
 use App\Repository\InvoiceRepository;
+use GraphQL\Executor\Promise\Promise;
 use GraphQL\Executor\Promise\PromiseAdapter;
 
 class InvoicesLoader
@@ -17,29 +18,29 @@ class InvoicesLoader
         $this->invoiceRepository = $invoiceRepository;
     }
 
-    public function userInvoicesLoader(array $userIDs)
+    public function resolveByUser(array $userIDs): Promise
     {
 
         return $this->loadInvoicesBy('issuer', $userIDs, fn (Invoice $inv) => $inv->getIssuer()->getId());
 
     }
 
-    public function loadInvoicesBy(string $key, array $IDs, callable $idExtractor)
+    public function loadInvoicesBy(string $key, array $IDs, callable $idExtractor): Promise
     {
         $invoices = $this->invoiceRepository->findBy([$key => $IDs]);
 
-        $userMap = array_fill_keys($IDs, []);
+        $map = array_fill_keys($IDs, []);
 
         foreach ($invoices as $invoice) {
-            $userMap[$idExtractor($invoice)][] = $invoice;
+            $map[$idExtractor($invoice)][] = $invoice;
         }
 
-        return $this->promiseAdapter->createFulfilled(array_values($userMap));
+        return $this->promiseAdapter->createFulfilled(array_values($map));
     }
 
-    public function clientInvoicesLoader(array $clientIDs)
+    public function resolveByClient(array $clientIDs): Promise
     {
-        $this->loadInvoicesBy('client', $clientIDs, fn (Invoice $inv) => $inv->getClient()->getId());
+        return $this->loadInvoicesBy('client', $clientIDs, fn (Invoice $inv) => $inv->getClient()->getId());
     }
 
 

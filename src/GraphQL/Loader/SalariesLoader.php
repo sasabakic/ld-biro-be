@@ -3,6 +3,7 @@
 namespace App\GraphQL\Loader;
 
 use App\Repository\SalaryRepository;
+use GraphQL\Executor\Promise\Promise;
 use GraphQL\Executor\Promise\PromiseAdapter;
 
 class SalariesLoader
@@ -17,16 +18,16 @@ class SalariesLoader
         $this->salaryRepository = $salaryRepository;
     }
 
-    public function all(array $userIDs)
+    public function resolveByUser(array $userIDs):Promise
     {
         $salaries = $this->salaryRepository->findBy(["user" => $userIDs]);
 
-        $userMap = array_fill_keys($userIDs, []);
+        $map = array_fill_keys($userIDs, []);
 
         foreach ($salaries as $salary) {
-            $userMap[$salary->getUser()->getId()][] = $salary;
+            $map[$salary->getUser()->getId()][] = $salary;
         }
 
-        return $this->promiseAdapter->createFulfilled(array_values($userMap));
+        return $this->promiseAdapter->createFulfilled(array_values($map));
     }
 }

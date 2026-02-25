@@ -16,19 +16,25 @@ overblog_dataloader:
         promise_adapter: "overblog_dataloader.webonyx_graphql_sync_promise_adapter"
     loaders:
         salaries:
-            alias: "salaries_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\SalariesLoader:all"
+            alias: "user_salaries_loader"
+            batch_load_fn: "@App\\GraphQL\\Loader\\SalariesLoader:resolveByUser"
         equipment:
-            alias: "equipment_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\EquipmentLoader:all"
+            alias: "user_equipment_loader"
+            batch_load_fn: "@App\\GraphQL\\Loader\\EquipmentLoader:resolveByUser"
         user_invoices:
             alias: "user_invoices_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\InvoicesLoader:userInvoicesLoader"
+            batch_load_fn: "@App\\GraphQL\\Loader\\InvoicesLoader:resolveByUser"
         client_invoices:
             alias: "client_invoices_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\InvoicesLoader:clientInvoicesLoader"
+            batch_load_fn: "@App\\GraphQL\\Loader\\InvoicesLoader:resolveByClient"
         clients:
-            alias: "clients_loader"
-            batch_load_fn: "@App\\GraphQL\\Loader\\ClientsLoader:all"
+            alias: "user_clients_loader"
+            batch_load_fn: "@App\\GraphQL\\Loader\\ClientsLoader:resolveByUser"
+        client:
+            alias: 'client_loader'
+            batch_load_fn: '@App\\GraphQL\\Loader\\ClientsLoader:resolveById'
+        user:
+            alias: "user_loader"
+            batch_load_fn: "@App\\GraphQL\\Loader\\UsersLoader:resolveById"
 
 

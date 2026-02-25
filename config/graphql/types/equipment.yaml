@@ -19,6 +19,7 @@ Equipment:
                 type: "EquipmentCategory!"
             user:
                 type: "User"
+                resolve: "@=service('user_loader').load(value.getEmployee().getId())"
 
 EquipmentStatus:
     type: enum
